@@ -1,0 +1,64 @@
+# Virtual environments
+venv_h100/
+venv/
+.venv/
+env/
+scripts/venv_h100/
+# Cluster / SLURM launchers (local only; not published with the repo)
+scripts/*.sh
+
+# CSI arrays under Dataset/ are versioned in this repo; ignore .npy elsewhere
+*.npy
+!Dataset/
+!Dataset/**/*.npy
+
+# Experiment outputs, metrics, and logs (do not commit training artifacts)
+experiments/
+experiments_special/
+logs/
+log/
+**/logs/
+archive/
+scripts/logs/
+slurm-*.out
+mlruns/
+tensorboard/
+lightning_logs/
+
+# Jupyter
+.ipynb_checkpoints/
+*-checkpoint.py
+*-checkpoint.ipynb
+*.ipynb
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+
+# Model checkpoints & results
+*.pt
+*.pth
+*.ckpt
+*.pdf
+*.csv
+*.log
+*.npz
+results/
+outputs/
+checkpoints/
+runs/
+wandb/
+
+# Configs with secrets (keep generic configs, ignore override files)
+configs/local_override*.yaml
+configs/*_secret*.yaml
+
+# OS / IDE
+.DS_Store
+.idea/
+.vscode/
+*.swp
+Dataset/

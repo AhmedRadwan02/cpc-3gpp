@@ -1,0 +1,74 @@
+experiment:
+  name: "afterComp_v2"
+  description: "CPC after compression V2 - adds extra encoder before temporal module"
+  seed: 42                    # Random seed for reproducibility
+  num_runs: 5                 # Number of runs (not used in script, for reference)
+
+model:
+  type: "afterComp_v2"        # Model type (DO NOT CHANGE for this config)
+  architecture:
+    compressed_size: 32       # Latent dimension size (16, 32, 64, 128)
+    hidden_size: 128          # Hidden size for temporal module (64, 128, 256)
+    num_bits: 2               # Quantization bits (2, 4, 8)
+    temporal_module:
+      type: "transformer"             # Options: gru, rnn, lstm, transformer
+      num_layers: 1           # Number of layers (1, 2, 3)
+      dropout: 0.0            # Dropout rate (0.0, 0.1, 0.2)
+      time_window: 10         # Window size for internal temporal grouping (10, 15, 20)
+      num_heads: 4            # For transformer only (4, 8, 16)
+      feedforward_dim: 256    # For transformer only (128, 256, 512)
+    prediction:
+      num_steps: 5            # Prediction steps (5, 10, 15, 20)
+      use_residual: false     # Use residual connections (true, false)
+
+loss:
+  reconstruction:
+    type: "v2_sgcs"           # Options: v2_sgcs, mse, l1 (use "v2_sgcs" for afterComp)
+    weight: 0.5               # Weight for reconstruction loss (0.3, 0.5, 0.7)
+  contrastive:
+    type: "infonce"           # Options: infonce, simclr, vicreg, none
+    weight: 0.5               # Weight for contrastive loss (0.3, 0.5, 0.7)
+    temperature: 0.1          # Temperature for InfoNCE/SimCLR - Main Table: Temp 0.1
+    sim_coeff: 25.0           # VICReg similarity coefficient (10.0, 25.0, 50.0)
+    std_coeff: 25.0           # VICReg std coefficient (10.0, 25.0, 50.0)
+    cov_coeff: 1.0            # VICReg covariance coefficient (0.5, 1.0, 2.0)
+
+training:
+  optimizer:
+    type: "adam"              # Optimizer type (adam, sgd, adamw)
+    lr: 1.0e-4                # Learning rate (1e-3, 1e-4, 1e-5)
+    weight_decay: 0.0         # Weight decay (0.0, 1e-4, 1e-5)
+  scheduler:
+    type: "none"              # Options: none, cosine, step
+    step_size: 30             # For step scheduler (10, 30, 50)
+    gamma: 0.1                # For step scheduler (0.1, 0.5)
+  epochs: 150                 # Maximum epochs (50, 100, 150, 200)
+  early_stopping:
+    patience: 25              # Early stopping patience (10, 25, 50)
+    metric: "val_sgcs"        # Metric to monitor (val_sgcs, val_loss)
+    mode: "max"               # Maximize or minimize (max for sgcs, min for loss)
+  batch_size: 256             # Batch size (64, 128, 256, 512) - multiplied by num_gpus
+
+data:
+  path: "Dataset"
+  datasets:
+    - name: "NOKIA"
+      path: "Nokia/N0KIR4_113dsei.npy"
+      num_samples: 600000     # Number of samples to load (null for all)
+    - name: "OPPO"
+      path: "OPPO/OPPOR4_113dsei00.npy"
+      num_samples: 600000
+    - name: "CAT"
+      path: "CAT/CAT0R4_113dsei01.npy"
+      num_samples: 100000
+  mixed_samples_per_dataset: 100000  # Samples per dataset for mixed (100000, 200000)
+  window_size: null           # Window size (null for afterComp - windowing handled internally)
+  splits:
+    train: 0.8                # Training split (0.7, 0.8, 0.9)
+    val: 0.1                  # Validation split (0.1, 0.15)
+    test: 0.1                 # Test split (0.1, 0.15)
+
+output:
+  base_dir: "./experiments"   # Output directory
+  save_best_only: true        # Save only best model (true, false)
+  save_frequency: 10          # Save checkpoint every N epochs (5, 10, 20)
