@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contrastive Predictive Coding with Compression for Enhanced CSI Feedback</title>
+  <meta name="description" content="Unified compression–prediction framework integrating Contrastive Predictive Coding into 3GPP-compliant CSI feedback.">
+
+  <meta property="og:title" content="Contrastive Predictive Coding with Compression for Enhanced CSI Feedback">
+  <meta property="og:description" content="Joint CSI compression and prediction via contrastive predictive coding in the 3GPP pipeline.">
+  <meta property="og:url" content="https://ahmedradwan02.github.io/cpc-3gpp/">
+  <meta property="og:image" content="https://ahmedradwan02.github.io/cpc-3gpp/static/images/fig2_architecture.png">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="icon" href="./static/favicon.ico" type="image/x-icon">
+  <link rel="canonical" href="https://ahmedradwan02.github.io/cpc-3gpp/">
+  <link rel="stylesheet" href="styles.css">
+
+  <script>
+    window.MathJax = {
+      tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']] },
+      options: { skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <a href="https://github.com/AhmedRadwan02/cpc-3gpp" class="brand-name" target="_blank" rel="noopener">CPC-3GPP</a>
+      </div>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="nav" id="nav" aria-label="Page sections">
+        <a href="#abstract">Abstract</a>
+        <a href="#methodology">Methodology</a>
+        <a href="#results">Results</a>
+        <a href="#quickstart">Quick Start</a>
+        <a href="#citation">Citation</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container hero-text">
+      <h1 class="title">Contrastive Predictive Coding with Compression for Enhanced Channel State Feedback in Wireless Networks</h1>
+
+      <p class="authors">
+        Ahmed Y. Radwan<sup>1</sup>,
+        Hina Tabassum<sup>1</sup>,
+        Fahad Syed Muhammad<sup>2</sup>,
+        Matthew Baker<sup>3</sup>
+      </p>
+      <p class="affiliations">
+        <sup>1</sup> Department of Electrical Engineering and Computer Science, York University, Toronto, ON, Canada<br>
+        <sup>2</sup> Nokia France, Paris-Saclay (Massy), France<br>
+        <sup>3</sup> Nokia UK, Cambridge, United Kingdom
+      </p>
+      <p class="venue-line">IEEE Transactions on Neural Networks and Learning Systems, 2026</p>
+
+      <div class="button-row">
+        <a class="btn btn-primary"  href="https://arxiv.org/abs/XXXX" target="_blank" rel="noopener">Paper</a>
+        <a class="btn" href="https://github.com/AhmedRadwan02/cpc-3gpp" target="_blank" rel="noopener">Code</a>
+        <a class="btn" href="https://www.3gpp.org/ftp/tsg_ran/WG4_Radio/Data_sharing/NR_AIML_air/CSI_compression/Datasets/R4_113" target="_blank" rel="noopener">Dataset</a>
+      </div>
+
+      <p class="lead">
+        A unified framework that integrates <strong>Contrastive Predictive Coding (CPC)</strong> into the 3GPP-compliant CSI compression pipeline,
+        jointly optimizing reconstruction fidelity and temporal prediction in latent space at <strong>64 bits per timestep</strong> feedback overhead.
+      </p>
+
+      <div class="badge-row">
+        <span class="pill">&gt;0.90 SGCS</span>
+        <span class="pill">32× lower decoder GFLOPs</span>
+        <span class="pill">64-bit feedback</span>
+        <span class="pill">Nokia · Oppo · CATT</span>
+      </div>
+
+      <div class="hero-figure">
+        <figure>
+          <img src="./static/images/fig2_architecture.png" alt="CPC-before-Compression and CPC-after-Compression integrated with the 3GPP CSI backbone">
+          <figcaption>
+            <strong>Figure 2.</strong> <em>CPC-before-Compression</em> applies temporal modeling on encoded features at the UE before quantization;
+            <em>CPC-after-Compression</em> shifts temporal modeling to the base station while preserving the 3GPP baseline encoder.
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="abstract">
+    <div class="container">
+      <h2>Abstract</h2>
+      <div class="abstract-box">
+        <p>
+          Accurate and timely channel state information (CSI) is essential for next-generation wireless systems, yet existing works treat CSI compression and CSI prediction as separate problems, both in academia and in current 3GPP studies. Consequently, channel aging remains insufficiently addressed within standardized CSI feedback pipelines.
+        </p>
+        <p>
+          We propose a unified compression–prediction framework that integrates Contrastive Predictive Coding (CPC) directly into the 3GPP-compliant CSI compression architecture. Instead of predicting high-dimensional CSI matrices, our approach forecasts future latent representations and jointly optimizes reconstruction fidelity and temporal predictive coherence via a combined 1-SGCS and InfoNCE objective, enabling temporal representation learning without increasing feedback overhead.
+        </p>
+        <p>
+          We present two variants: <strong>CPC-before-Compression</strong>, which performs autoregressive modeling on encoded features prior to quantization, and <strong>CPC-after-Compression</strong>, which shifts temporal modeling to the base station to reduce user-device complexity. On 3GPP-compliant datasets from Nokia, Oppo, and CATT, CPC-before-Compression achieves over 90% reconstruction accuracy with 32× lower decoder GFLOPs than the 3GPP baseline, while CPC-after-Compression preserves an identical encoder footprint and the same 64-bit feedback overhead.
+        </p>
+      </div>
+
+      <h2 class="section-heading-spaced">Overview</h2>
+      <div class="grid-4">
+        <div class="stat"><div class="stat-value">&gt;0.90</div><div class="stat-label">Peak SGCS</div></div>
+        <div class="stat"><div class="stat-value">32×</div><div class="stat-label">Lower decoder GFLOPs</div></div>
+        <div class="stat"><div class="stat-value">64-bit</div><div class="stat-label">Feedback per timestep</div></div>
+        <div class="stat"><div class="stat-value">3</div><div class="stat-label">3GPP vendor datasets</div></div>
+      </div>
+
+      <div class="info-box">
+        <div class="h3">Contributions</div>
+        <ul class="bullets">
+          <li><strong>Unified compression and prediction</strong> — CPC integrated into the 3GPP CSI compression pipeline rather than treated as a separate use case.</li>
+          <li><strong>Latent-space forecasting</strong> — future representations predicted without additional uplink overhead.</li>
+          <li><strong>Two deployment variants</strong> — CPC-before (UE-side temporal modeling) and CPC-after (BS-side, lightweight UE encoder).</li>
+          <li><strong>Channel aging</strong> — temporal modeling addresses delay between CSI acquisition and use in high-mobility scenarios.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt" id="methodology">
+    <div class="container">
+      <h2>Methodology</h2>
+      <p class="section-intro">
+        The proposed methods extend the 3GPP ResNet autoencoder with contrastive predictive coding applied either before or after the compression bottleneck.
+      </p>
+
+      <div class="h3">3GPP CSI compression backbone</div>
+      <p>
+        A ResNet-based encoder maps CSI \(\mathbf{H}_t\) to 64 feature maps, passes through ResNet blocks, and projects to a 32-dimensional quantized latent \(\mathbf{z}_t\). The decoder reconstructs \(\tilde{\mathbf{H}}_t\). Reconstruction quality is measured with <strong>Squared Generalized Cosine Similarity (SGCS)</strong>; training minimizes \(1 - \text{SGCS}\).
+      </p>
+
+      <div class="variant-grid">
+        <div class="card">
+          <h4>CPC-before-Compression</h4>
+          <p class="small muted">A GRU autoregressive module operates on encoded features before quantization at the UE. Temporal context is summarized into a 128-dimensional vector; future representations are predicted and compressed to a 32-dimensional latent for uplink transmission.</p>
+        </div>
+        <div class="card">
+          <h4>CPC-after-Compression</h4>
+          <p class="small muted">The encoder matches the 3GPP baseline. Contrastive predictive coding is applied at the base station on reconstructed CSI, preserving a minimal UE computational footprint.</p>
+        </div>
+      </div>
+
+      <div class="h3">Training objective</div>
+      <div class="equations">
+        \[
+        \mathcal{L}_{\text{SGCS}} = 1 - \text{SGCS}, \qquad
+        \mathcal{L}_{\text{total}} = \alpha \cdot \mathcal{L}_{\text{SGCS}} + (1 - \alpha) \cdot \mathcal{L}_{\text{InfoNCE}}, \quad \alpha = 0.5
+        \]
+        \[
+        \mathcal{L}_{\text{InfoNCE}} = \frac{1}{T}\sum_{k=1}^{T} \ell_k, \quad
+        \ell_k = -\frac{1}{B}\sum_{i=1}^{B} \log \frac{\exp\left(\mathbf{C}_{t+k}^{(i)} \cdot \mathbf{C}_t^{(i)} / \tau\right)}{\sum_{j=1}^{B} \exp\left(\mathbf{C}_{t+k}^{(i)} \cdot \mathbf{C}_t^{(j)} / \tau\right)}
+        \]
+      </div>
+      <p class="small muted">Type-1 joint training; 2-bit weight quantization; GRU hidden size 128; prediction horizon \(T=5\); temperature \(\tau=0.1\).</p>
+    </div>
+  </section>
+
+  <section class="section" id="results">
+    <div class="container">
+      <h2>Results</h2>
+      <p class="section-intro">
+        Evaluation on 3GPP R4-113 datasets from Nokia, Oppo, and CATT, including a mixed training set, with cross-dataset testing and five random seeds per configuration.
+      </p>
+
+      <p class="table-caption">SGCS (↑) and InfoNCE (↓) across training and test datasets</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Training</th><th>Nokia</th><th>Oppo</th><th>CATT</th><th>Mixed</th></tr>
+          </thead>
+          <tbody>
+            <tr><td colspan="5" style="font-weight:700;background:var(--bg-soft);text-align:left;padding-left:1rem;">3GPP baseline (SGCS only)</td></tr>
+            <tr><td>NOKIA</td><td>0.729</td><td>0.735</td><td>0.563</td><td>0.676</td></tr>
+            <tr><td>OPPO</td><td>0.726</td><td>0.733</td><td>0.560</td><td>0.673</td></tr>
+            <tr><td>CATT</td><td>0.637</td><td>0.644</td><td>0.674</td><td>0.656</td></tr>
+            <tr><td>Mixed</td><td>0.725</td><td>0.732</td><td>0.614</td><td>0.691</td></tr>
+            <tr><td colspan="5" style="font-weight:700;background:var(--bg-soft);text-align:left;padding-left:1rem;">CPC-before-Compression</td></tr>
+            <tr><td>NOKIA</td><td>0.726 (0.646)</td><td>0.725 (0.639)</td><td>0.738 (0.668)</td><td>0.720 (0.664)</td></tr>
+            <tr><td>OPPO</td><td>0.869 (0.150)</td><td>0.869 (0.147)</td><td>0.866 (0.338)</td><td>0.867 (0.158)</td></tr>
+            <tr><td>CATT</td><td>0.912 (0.666)</td><td>0.912 (0.651)</td><td>0.925 (0.279)</td><td>0.917 (0.313)</td></tr>
+            <tr><td>Mixed</td><td>0.886 (0.186)</td><td>0.886 (0.182)</td><td>0.887 (0.260)</td><td>0.885 (0.183)</td></tr>
+            <tr><td colspan="5" style="font-weight:700;background:var(--bg-soft);text-align:left;padding-left:1rem;">CPC-after-Compression</td></tr>
+            <tr><td>NOKIA</td><td>0.730 (0.008)</td><td>0.735 (0.008)</td><td>0.566 (0.074)</td><td>0.677 (0.009)</td></tr>
+            <tr><td>OPPO</td><td>0.733 (0.008)</td><td>0.739 (0.008)</td><td>0.568 (0.068)</td><td>0.680 (0.009)</td></tr>
+            <tr><td>CATT</td><td>0.648 (0.014)</td><td>0.656 (0.014)</td><td>0.674 (0.035)</td><td>0.664 (0.010)</td></tr>
+            <tr><td>Mixed</td><td>0.720 (0.005)</td><td>0.728 (0.005)</td><td>0.627 (0.037)</td><td>0.692 (0.005)</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="table-caption">Model complexity (batch size = 256, 2-bit quantization)</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Metric</th><th>3GPP</th><th>CPC-before</th><th>CPC-after</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Encoder parameters</td><td>872K</td><td>10.6M</td><td>872K</td></tr>
+            <tr><td>Decoder parameters</td><td>1.36M</td><td>103K</td><td>1.81M</td></tr>
+            <tr><td>Encoder GFLOPs</td><td>0.59</td><td>10.47</td><td>0.59</td></tr>
+            <tr><td>Decoder GFLOPs</td><td>0.84</td><td>0.026</td><td>1.21</td></tr>
+            <tr><td>Encoder time (ms/batch)</td><td>2.45</td><td>2.10</td><td>2.45</td></tr>
+            <tr><td>Decoder time (ms/batch)</td><td>2.51</td><td>0.68</td><td>2.94</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="key-findings">
+        <div class="h3">Summary</div>
+        <ul class="bullets">
+          <li>CPC-before-Compression achieves SGCS up to 0.92 with 32× lower decoder GFLOPs than the 3GPP baseline.</li>
+          <li>CPC-after-Compression matches baseline reconstruction accuracy while providing future CSI estimates at the base station.</li>
+          <li>For CPC-after-Compression, InfoNCE remains near zero, indicating that the compression bottleneck limits temporal learning.</li>
+          <li>Mixed-dataset training provides balanced cross-vendor generalization for CPC-before-Compression.</li>
+        </ul>
+      </div>
+
+      <div class="h3">Ablation studies</div>
+      <figure class="figure">
+        <img src="./static/images/fig3_pruning.png" alt="Structured GRU pruning versus SGCS and InfoNCE" loading="lazy">
+        <figcaption><strong>Figure 3.</strong> Structured pruning of the GRU in CPC-before-Compression (hidden size 128), averaged over five runs.</figcaption>
+      </figure>
+
+      <div class="figure-grid-2">
+        <figure class="figure">
+          <img src="./static/images/fig4a_backbone.png" alt="Effect of temporal backbone on SGCS" loading="lazy">
+          <figcaption><strong>Figure 4a.</strong> Effect of GRU, LSTM, and Transformer backbones.</figcaption>
+        </figure>
+        <figure class="figure">
+          <img src="./static/images/fig4b_loss.png" alt="Effect of reconstruction loss on SGCS" loading="lazy">
+          <figcaption><strong>Figure 4b.</strong> 1-SGCS versus MSE reconstruction loss.</figcaption>
+        </figure>
+      </div>
+
+      <details class="ablations">
+        <summary>Additional ablation tables</summary>
+        <p class="table-caption">Prediction horizon \(T\) (SGCS / InfoNCE, mixed training)</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Variant</th><th>T=2</th><th>T=5</th><th>T=10</th><th>T=20</th></tr></thead>
+            <tbody>
+              <tr><td>CPC-before-Compression</td><td>0.873 / 0.182</td><td>0.886 / 0.203</td><td>0.817 / 0.975</td><td>0.842 / 1.959</td></tr>
+              <tr><td>CPC-after-Compression</td><td>0.694 / 0.015</td><td>0.692 / 0.013</td><td>0.698 / 0.016</td><td>0.693 / 0.015</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <section class="section section-alt" id="quickstart">
+    <div class="container">
+      <h2>Quick Start</h2>
+      <p class="section-intro">
+        Source code and experiment configurations are available at
+        <a href="https://github.com/AhmedRadwan02/cpc-3gpp" target="_blank" rel="noopener">github.com/AhmedRadwan02/cpc-3gpp</a>.
+        Run all commands from the repository root.
+      </p>
+
+      <div class="h3">Installation</div>
+      <div class="code-block"><code>git clone https://github.com/AhmedRadwan02/cpc-3gpp.git
+cd cpc-3gpp
+python -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt</code></div>
+
+      <div class="h3">Dataset</div>
+      <p class="small">
+        Download the Nokia, OPPO, and CAT releases from
+        <a href="https://www.3gpp.org/ftp/tsg_ran/WG4_Radio/Data_sharing/NR_AIML_air/CSI_compression/Datasets/R4_113" target="_blank" rel="noopener">3GPP R4-113</a>
+        and place them under <code>Dataset/</code>.
+      </p>
+
+      <div class="h3">Training</div>
+      <div class="code-block"><code>python -m src.main --config configs/baseline.yaml --run 1
+python -m src.main --config configs/beforeComp.yaml --run 1
+python -m src.main --config configs/afterComp_v1.yaml --run 1
+python -m src.main --config configs/afterComp_v2.yaml --run 1</code></div>
+
+      <p class="small muted">Results are written to <code>experiments/</code>, including model checkpoints and <code>test_results.csv</code> for cross-dataset evaluation.</p>
+    </div>
+  </section>
+
+  <section class="section" id="citation">
+    <div class="container">
+      <h2>Citation</h2>
+      <div class="bibtex-wrap">
+        <div class="copy-row">
+          <button type="button" class="btn btn-small" id="copyBibtex">Copy BibTeX</button>
+          <span id="copyStatus"></span>
+        </div>
+        <pre class="bibtex-block" id="bibtexBlock">@article{radwan2026cpc3gpp,
+  title   = {Contrastive Predictive Coding with Compression for Enhanced Channel State Feedback in Wireless Networks},
+  author  = {Radwan, Ahmed Y. and Tabassum, Hina and Syed Muhammad, Fahad and Baker, Matthew},
+  journal = {IEEE Transactions on Neural Networks and Learning Systems},
+  year    = {2026},
+}</pre>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>
+        <a href="mailto:hinat@yorku.ca">hinat@yorku.ca</a> ·
+        <a href="mailto:ahmedyradwan02@gmail.com">ahmedyradwan02@gmail.com</a> ·
+        <a href="https://github.com/AhmedRadwan02/cpc-3gpp" target="_blank" rel="noopener">GitHub</a>
+      </p>
+      <a class="back-top" href="#">Back to top</a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

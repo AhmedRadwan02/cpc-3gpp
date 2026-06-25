@@ -43,6 +43,7 @@ __pycache__/
 *.pth
 *.ckpt
 *.pdf
+!docs/static/paper.pdf
 *.csv
 *.log
 *.npz
