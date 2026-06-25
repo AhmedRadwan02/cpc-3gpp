@@ -1,6 +1,8 @@
 # Contrastive Predictive Coding with Compression for Enhanced Channel State Feedback in Wireless Networks
 
 **Ahmed Y. Radwan** and **Hina Tabassum** — Department of Electrical Engineering and Computer Science, York University, Toronto, ON, Canada.
+Fahad Syed Muhammad - Nokia France
+ Matthew Baker - Nokia UK
 
 The codebase is **config-driven**: it compresses **3GPP-style Channel State Information (CSI)** with neural autoencoders, combining reconstruction objectives (including SGCS-style losses) with **Contrastive Predictive Coding (CPC)** so temporal structure in CSI sequences is used in line with CSI feedback settings. Variants include a baseline quantized autoencoder, CPC **before** the compression bottleneck, and two CPC-after-reconstruction models (V1/V2). Training and evaluation are run with **Python** from the repo root, using YAML under `configs/` and `python -m src.main`.
 
