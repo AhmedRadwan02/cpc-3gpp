@@ -319,3 +319,14 @@ Copy an existing file under `configs/`, edit hyperparameters, then run with `pyt
 
 **"ModuleNotFoundError: No module named 'src'"**: Run from the repository root, not from inside `src/`
 
+---
+
+## Citation
+
+```
+@article{radwan2026cpc3gpp,
+  title   = {Contrastive Predictive Coding with Compression for Enhanced Channel State Feedback in Wireless Networks},
+  author  = {Radwan, Ahmed Y. and Tabassum, Hina and Syed Muhammad, Fahad and Baker, Matthew},
+  journal = {IEEE Transactions on Neural Networks and Learning Systems},
+  year    = {2026},
+  ```
