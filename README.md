@@ -324,9 +324,11 @@ Copy an existing file under `configs/`, edit hyperparameters, then run with `pyt
 ## Citation
 
 ```
-@article{radwan2026cpc3gpp,
-  title   = {Contrastive Predictive Coding with Compression for Enhanced Channel State Feedback in Wireless Networks},
-  author  = {Radwan, Ahmed Y. and Tabassum, Hina and Syed Muhammad, Fahad and Baker, Matthew},
-  journal = {IEEE Transactions on Neural Networks and Learning Systems},
-  year    = {2026},
+@article{radwan2026contrastive,
+  title={Contrastive Predictive Coding With Compression for Enhanced Channel State Feedback in Wireless Networks},
+  author={Radwan, Ahmed Y and Muhammad, Fahad Syed and Baker, Matthew and Tabassum, Hina},
+  journal={IEEE Transactions on Neural Networks and Learning Systems},
+  year={2026},
+  publisher={IEEE}
+}
   ```
